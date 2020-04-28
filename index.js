@@ -59,32 +59,51 @@ let repTextStart = ()=>{
 }
 
 let update = (n)=>{
-	commands.update(svnArr,{
-        username: "",
-        password: ""
-	},
-    function( err ) {
-    	if(err){
-    		console.log(err)
-    	}else{
-    		console.log( `Update complete` );
-    	}
-    } );
+	svnArr.forEach((val,index,arr)=>{
+		commands.update(val,{
+	        username: "",
+	        password: ""
+		},
+	    function( err ) {
+	    	if(err){
+	    		console.log(err)
+	    	}else{
+	    		console.log( `Update complete` );
+	    	}
+	    } );
+	});
+	
 }
 
 let commit = ()=>{
-	commands.commit( svnArr,{
-		username: "",
-		password: "",
-		params: [ '-m "node xxxx"' ] // extra parameters to pass
-	},
-    function( err ) {
-    	if(err){
-    		console.log(err);
-    	}else{
-    		console.log( `commit complete` );
-    	}
-    } );
+	svnArr.forEach((val,index,arr)=>{
+		commands.commit( val,{
+			username: "",
+	        password: "",
+	        params: [ '-m "node xxx"' ] // extra parameters to pass
+		},
+	    function( err ) {
+	    	if(err){
+	    		console.log(err);
+	    	}else{
+	    		console.log( `commit complete` );
+	    	}
+	    } );
+	});
+}
+
+let cleanup = ()=>{
+	commands.cleanup( '',{
+			username: "",
+	        password: ""
+		},
+	    function( err ) {
+	    	if(err){
+	    		console.log(err);
+	    	}else{
+	    		console.log( `cleanup complete` );
+	    	}
+	    } );
 }
 
 let pro = (cb) =>{
@@ -93,10 +112,10 @@ let pro = (cb) =>{
 		time = setTimeout(()=>{
 			clearTimeout(time);
 			res(cb());
-		}, 5000);
+		},9000);
 	});
 }
-
+// cleanup();
 //俄罗斯套娃;
 pro(update)
 .then(()=>{

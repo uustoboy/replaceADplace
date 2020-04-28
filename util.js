@@ -29,9 +29,9 @@ const filterFile = (parameter)=>{
             let content = readFile(parameter);
             let keyArr = [];
             for (var key in textReplace) {
-                keyArr.push(key);
+                keyArr.push(regExpEscape(key));
             }
-
+            
             reg = new RegExp(keyArr.join("|"), "g");
             let strNew = content.replace(reg, function(matchStr) {
               return textReplace[matchStr];
@@ -57,7 +57,7 @@ const filterFile = (parameter)=>{
                             let content = readFile(filedir);
                             let keyArr = [];
                             for (var key in textReplace) {
-                                keyArr.push(key);
+                                keyArr.push(regExpEscape(key));
                             }
                             reg = new RegExp(keyArr.join("|"), "g");
                             let strNew = content.replace(reg, function(matchStr) {
@@ -173,6 +173,9 @@ const isFileIn = ( _path ) => fs.existsSync( _path )?true:false;
 //replaceAll正则;
 String.prototype.replaceAll = function(s1, s2) {
     return this.replace(new RegExp(s1, "gm"), s2);
+}
+let regExpEscape = (literal_string)=> {
+    return literal_string.replace(/[-[\]{}()*+!<=:?.\/\\^$|#\s,]/g, '\\$&');
 }
 
 let textFileterFile = (file,text)=>{
