@@ -1,12 +1,13 @@
 let svnUltimate = require('node-svn-ultimate');
 let commands = svnUltimate.commands;
 let filterFile = require('./util.js');
-let replaceADplace = [
+let adPlace = [
 	{	//首页
 		path:'',
 		textReplace:{
-			'' : '',  //首页标题1
-			'' : '' //首页标题2
+			'',  //首页标题1
+			'' : '', //首页标题2
+			'' : '' //专题链接
 		}
 	},
 	{  //新版 我的侧边侧栏
@@ -16,7 +17,8 @@ let replaceADplace = [
 		],
 		textReplace:{
 			'' : '',  //侧边侧栏标题1
-			'' : '' //侧边侧栏标题2
+			'' : '', //侧边侧栏标题2
+			'' : '' //专题链接
 		}
 	},
 	{  //老版 我的侧边侧栏
@@ -25,22 +27,38 @@ let replaceADplace = [
 			'' //老版侧边侧栏 线上环境
 		],
 		textReplace:{
-			'' : ''  //侧边侧栏标题1
+			'' : '',  //侧边侧栏标题1
+			'' : '' //专题链接
 		}
 	},
 	{  //导航 -> 服务
 		path:[
 			'',	//新版导航 测试环境
 			'', //新版导 线上环境
-			// '',  //老版导航 测试环境
-			// ''  //老版导航 线上环境
+			'',  //老版导航 测试环境
+			''  //老版导航 线上环境
 		],
 		textReplace:{
-			'' : ''  //导航服务标题
+			'' : '',  //导航服务标题
+			'' : '' //专题链接
 		}
 	}
 ];
 
+let appVersion = [
+	{  // 更改APP版本号 
+		path:[
+			'',    // H5
+			'',	// H5
+			'',    // 落地注册
+			'',   // 落地注册
+		],
+		textReplace:{
+			'' : '',  //更改APP版本号
+		}
+	}
+];
+let replaceADplace = appVersion;
 let svnArr = [];
 for(var i=0;i<replaceADplace.length;i++){
 	let path = replaceADplace[i].path;
